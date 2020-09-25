@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.football.matches.livescores">
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:hardwareAccelerated="true"
+        android:icon="@mipmap/ic_launcher"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme" >
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-1664544401210620~7167403413"/>
+        <activity android:name=".ui.ArticleActivity" android:label="Article"></activity>
+        <activity
+            android:name=".ui.PlayerActivity"
+            android:theme="@style/noActionBar"
+            android:screenOrientation="portrait"
+            />
+        <activity
+            android:name=".ui.SearchActivity"
+            android:theme="@style/MyNoActionBarShadowTheme"
+            android:screenOrientation="portrait"
+            />
+        <activity
+            android:name=".ui.LeagueActivity"
+            android:label=""
+            android:theme="@style/noActionBar"
+            android:screenOrientation="portrait"
+            />
+        <activity
+            android:name=".ui.MatchActivity"
+            android:label=""
+            android:theme="@style/noActionBar"
+            android:screenOrientation="portrait"
+            />
+        <activity
+            android:name=".ui.SplachActivity"
+            android:theme="@style/noActionBar"
+            android:screenOrientation="portrait"
+            >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.TeamActivity"
+            android:label=""
+            android:theme="@style/MyNoActionBarShadowTheme"
+            android:screenOrientation="portrait"
+            />
+        <activity
+            android:name=".ui.ChooseTeam"
+            android:label="Choose team"
+            android:windowSoftInputMode="stateHidden"
+            android:screenOrientation="portrait"
+            />
+        <activity
+            android:name=".ui.MainActivity"
+            android:label=""
+            android:theme="@style/MyNoActionBarShadowTheme"
+            android:screenOrientation="portrait"
+            />
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
+    </application>
+
+</manifest>

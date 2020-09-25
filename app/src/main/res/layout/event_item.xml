@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:background="@drawable/raduis_background"
+    android:layout_margin="@dimen/_5sdp"
+    android:elevation="3dp"
+
+    >
+
+    <ImageView
+        android:id="@+id/event_icon"
+        android:layout_width="@dimen/_30sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:src="@drawable/soccer_ball"
+        android:layout_marginStart="@dimen/_5sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="@dimen/_3sdp"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/minite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_10sdp"
+        android:text="45"
+        android:textColor="@color/colorAccent"
+        android:textSize="@dimen/_12ssp"
+        android:fontFamily="@font/quando"
+        app:layout_constraintStart_toEndOf="@id/event_icon"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="@dimen/_5sdp"/>
+
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Yellow Card"
+    android:textColor="@color/colorAccent"
+    android:id="@+id/event_type"
+    android:textStyle="bold"
+    android:textSize="@dimen/_12ssp"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    android:layout_marginEnd="@dimen/_10sdp"
+    android:fontFamily="@font/quando"
+    android:layout_margin="@dimen/_10sdp"
+    />
+
+    <TextView
+        android:id="@+id/first_player"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_7sdp"
+        android:text="Lionel Messi"
+        android:textSize="@dimen/_10ssp"
+        android:fontFamily="@font/quando"
+        android:textColor="@color/colorAccent"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+     android:layout_marginBottom="@dimen/_10sdp"
+    />
+
+
+    <TextView
+        android:id="@+id/second_player"
+        android:layout_width="@dimen/_150sdp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_5sdp"
+        android:fontFamily="@font/quando"
+        android:gravity="left"
+        android:textColor="@color/colorAccent"
+        android:textSize="@dimen/_10ssp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/team_logo"
+        app:layout_constraintHorizontal_bias="0.168"
+        app:layout_constraintStart_toEndOf="@id/downarrow"
+        app:layout_constraintVertical_bias="0.5"
+        android:layout_marginBottom="@dimen/_10sdp"/>
+
+    <ImageView
+        android:id="@+id/team_logo"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="@dimen/_5sdp"
+/>
+    <ImageView
+        android:id="@+id/uparrow"
+        android:layout_width="@dimen/_12sdp"
+        android:layout_height="@dimen/_15sdp"
+        android:rotation="180"
+        android:src="@drawable/down_arrow"
+        android:visibility="gone"
+        android:tint="#0EC30E"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/first_player"
+        app:layout_constraintCircleAngle="180"
+     android:layout_marginBottom="@dimen/_10sdp"
+        />
+
+    <ImageView
+        android:id="@+id/downarrow"
+        android:layout_width="@dimen/_12sdp"
+        android:layout_height="@dimen/_15sdp"
+        android:src="@drawable/down_arrow"
+        android:visibility="gone"
+        android:tint="#CD0A0A"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/uparrow"
+        android:layout_marginStart="@dimen/_5sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

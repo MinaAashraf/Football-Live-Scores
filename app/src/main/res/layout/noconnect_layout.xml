@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorPrimaryDark"
+    android:gravity="center"
+    android:layout_marginBottom="@dimen/_100sdp"
+    android:layout_gravity="center_vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    android:orientation="vertical">
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/noconnect_icon" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_15sdp"
+        android:layout_marginTop="@dimen/_40sdp"
+        android:layout_marginRight="@dimen/_15sdp"
+        android:text="It seems you aren't connected to the internet - We can't find any network!"
+        android:textColor="@color/colorAccent"
+        android:textSize="@dimen/_13ssp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="RETRY"
+        android:paddingRight="@dimen/_10sdp"
+        android:paddingLeft="@dimen/_10sdp"
+        android:paddingTop="@dimen/_5sdp"
+        android:elevation="1dp"
+        android:paddingBottom="@dimen/_5sdp"
+        android:textColor="@color/colorAccent"
+        android:textStyle="bold"
+
+        android:id="@+id/retry"
+        android:layout_marginTop="@dimen/_30sdp"
+        android:background="@drawable/text_border"
+        />
+
+</LinearLayout>

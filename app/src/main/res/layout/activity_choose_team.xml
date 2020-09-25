@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F4F4F4"
+    android:id="@+id/parent"
+    tools:context=".ui.ChooseTeam">
+
+    <ProgressBar
+        android:id="@+id/progressbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/colorAccent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+  <TextView
+      android:layout_width="match_parent"
+      android:layout_height="@dimen/_40sdp"
+      android:id="@+id/searchview"
+      android:layout_margin="@dimen/_10sdp"
+      app:layout_constraintTop_toTopOf="parent"
+      android:background="#fff"
+      android:text="Search by team name.."
+      android:textSize="@dimen/_14ssp"
+      android:textColor="#ACACAC"
+      android:drawablePadding="@dimen/_14sdp"
+      android:gravity="center_vertical"
+      android:paddingLeft="@dimen/_10sdp"
+      android:elevation="3dp"
+      android:drawableLeft="@drawable/search_icon"/>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:background="#fff"
+        android:elevation="1dp"
+        app:layout_constraintBottom_toTopOf="@id/skip_btn"
+        app:layout_constraintTop_toBottomOf="@id/searchview"
+        app:layout_constraintVertical_bias="0.0"
+        tools:layout_editor_absoluteX="73dp" />
+
+
+    <Button
+        android:id="@+id/skip_btn"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:background="@color/colorPrimary"
+        android:fontFamily="@font/palanquin_dark"
+        android:gravity="center"
+        android:text="SKIP THIS STEP"
+        android:textColor="#000"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

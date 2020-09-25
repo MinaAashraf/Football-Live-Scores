@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Football Live Scores</string>
+    <string name="followingTeamsObjs">followingTeamsObjs</string>
+    <string name="followingLeagueObjs">followingLeagueObjs</string>
+    <string name="followingPlayerObjs">followingPlayerObjs</string>
+    <string name="ad_app_id">ca-app-pub-1664544401210620~7167403413</string>
+    <string name="ad_unit_id">ca-app-pub-1664544401210620/3628625411</string>
+</resources>

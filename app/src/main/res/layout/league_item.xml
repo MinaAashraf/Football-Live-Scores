@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/league_logo"
+        android:layout_width="@dimen/_20sdp"
+        android:layout_height="@dimen/_20sdp"
+        android:src="@drawable/addcomp_icon"
+        android:layout_gravity="center_vertical"
+        android:tint="@color/colorAccent"
+        android:layout_marginLeft="@dimen/_10sdp"/>
+
+
+    <TextView
+        android:id="@+id/league_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:fontFamily="@font/palanquin_dark"
+        android:layout_gravity="center_vertical"
+        android:text="Egyptian League"
+        android:textSize="@dimen/_12ssp" />
+
+
+</LinearLayout>
