@@ -13,11 +13,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
@@ -28,16 +26,13 @@ import com.football.matches.livescores.pojo.FixtureResposeObj;
 import com.football.matches.livescores.pojo.Goals;
 import com.football.matches.livescores.pojo.League;
 import com.football.matches.livescores.pojo.Team;
-import com.google.android.ads.nativetemplates.TemplateView;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdLoader;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.LoadAdError;
-import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.formats.UnifiedNativeAd;
 import com.google.android.gms.ads.formats.UnifiedNativeAdView;
-import com.google.android.gms.ads.initialization.InitializationStatus;
-import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
@@ -45,10 +40,8 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -100,13 +93,17 @@ public class LiveScoresFragment extends Fragment {
 
         myViewModel = ViewModelProviders.of(getActivity()).get(MyViewModel.class);
         if (!compSet.isEmpty()) {
-            for (League league : getLeagueObjsFromJsons(compSet))
+            leagueIds.clear();
+            List<League> leagues = getLeagueObjsFromJsons(compSet);
+            for (League league : leagues)
                 leagueIds.add(league.getId());
             observeAllLeagueMatches(leagueIds);
         }
 
         if (!teamsSet.isEmpty()) {
-            for (Team team : getTeamObjsFromJsons(teamsSet))
+            teamIds.clear();
+            List<Team> teams = getTeamObjsFromJsons(teamsSet);
+            for (Team team : teams)
                 teamIds.add(team.getId());
             observeAllTeamMatches(teamIds);
         }
@@ -136,8 +133,8 @@ public class LiveScoresFragment extends Fragment {
     int count = 0;
 
     public void extractMapItems(List<FixtureResposeObj> fixtureResposeObjs) {
-        /* if (count++!=0)
-             return;*/
+        if (count++ != 0)
+            return;
         for (FixtureResposeObj fixtureObj : fixtureResposeObjs) {
             String date = fixtureObj.getFixture().getDate();
             if (datedKeyMap.containsKey(date)) {
@@ -213,11 +210,12 @@ public class LiveScoresFragment extends Fragment {
                     }
                 }
             }
-            if (progressbar.getVisibility() == View.VISIBLE)
+            if (progressbar.getVisibility() == View.VISIBLE) {
                 progressbar.setVisibility(View.GONE);
+                linearlayout.setVisibility(View.VISIBLE);
+            }
 
             linearlayout.addView(myLayout);
-
         }
 
     }
@@ -262,7 +260,7 @@ public class LiveScoresFragment extends Fragment {
                 List<FixtureResposeObj> fixtures = leaguesFixturesMap.get(leagueId);
                 boolean exist = false;
                 for (int i = 0; i < fixtures.size(); i++) {
-                    if (fixtures.get(i).getLeague().getId() == fixtureObj.getLeague().getId()) {
+                    if (fixtures.get(i).getFixture().getId() == fixtureObj.getFixture().getId()) {
                         exist = true;
                         break;
                     }
@@ -280,7 +278,6 @@ public class LiveScoresFragment extends Fragment {
                 leaguesFixturesMap.put(leagueId, newList);
             }
         }
-
     }
 
 
@@ -288,27 +285,43 @@ public class LiveScoresFragment extends Fragment {
         for (int id : teamIds) {
             Map<String, String> map = new HashMap<>();
             map.put("team", String.valueOf(id));
-            observeGeneralFixtures(map);
+            observeTeamFixtures(map);
         }
     }
 
     public void observeAllLeagueMatches(List<Integer> leagueIds) {
-        for (int id : leagueIds) {
-            Map<String, String> map = new HashMap<>();
-            map.put("league", String.valueOf(id));
-            observeGeneralFixtures(map);
-        }
+        for (int id : leagueIds)
+            observeLeagueFixtures(id);
     }
 
-    public void observeGeneralFixtures(Map<String, String> map) {
+    private void observeLeagueFixtures(int leagueId) {
+        myViewModel.getLeagueFixtures(leagueId).observe(getActivity(), new Observer<List<List<FixtureResposeObj>>>() {
+            @Override
+            public void onChanged(List<List<FixtureResposeObj>> fixtureResposeObjsLists) {
+                if (fixtureResposeObjsLists.size() == compSet.size()) {
+                    for (List<FixtureResposeObj> fixtireObjList : fixtureResposeObjsLists) {
+                        fixtureResposeObjects.addAll(fixtireObjList);
+                    }
+                    fixturesObjectsAddingTimes += fixtureResposeObjsLists.size();
+                    if (fixturesObjectsAddingTimes == teamsSet.size() + compSet.size())
+                        extractMapItems(fixtureResposeObjects);
+                }
+            }
+        });
+    }
+
+    int fixturesObjectsAddingTimes = 0;
+
+    public void observeTeamFixtures(Map<String, String> map) {
         myViewModel.getGeneralFixtures(map).observe(getActivity(), new Observer<List<List<FixtureResposeObj>>>() {
             @Override
             public void onChanged(List<List<FixtureResposeObj>> lists) {
-                if (lists.size() == teamsSet.size() + compSet.size()) {
-                    for (List<FixtureResposeObj> fixtireObjList : lists) {
+                if (lists.size() == teamsSet.size()) {
+                    for (List<FixtureResposeObj> fixtireObjList : lists)
                         fixtureResposeObjects.addAll(fixtireObjList);
-                    }
-                    extractMapItems(fixtureResposeObjects);
+                    fixturesObjectsAddingTimes += lists.size();
+                    if (fixturesObjectsAddingTimes == teamsSet.size() + compSet.size())
+                        extractMapItems(fixtureResposeObjects);
                 }
             }
         });

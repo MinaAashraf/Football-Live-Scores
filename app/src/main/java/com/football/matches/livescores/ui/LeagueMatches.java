@@ -60,10 +60,10 @@ public class LeagueMatches extends Fragment {
     }
 
     private void observeLeagueFixtures(int leagueId) {
-        myViewModel.getLeagueFixtures(leagueId).observe(getActivity(), new Observer<List<FixtureResposeObj>>() {
+        myViewModel.getLeagueFixtures(leagueId).observe(getActivity(), new Observer<List<List<FixtureResposeObj>>>() {
             @Override
-            public void onChanged(List<FixtureResposeObj> fixtureResposeObjs) {
-                extractMapItems(fixtureResposeObjs);
+            public void onChanged(List<List<FixtureResposeObj>> fixtureResposeObjsLists) {
+                extractMapItems(fixtureResposeObjsLists.get(0));
             }
         });
     }

@@ -29,7 +29,9 @@
         android:fontFamily="@font/alfa_slab_one"
         android:text="@string/app_name"
         android:textColor="@color/colorAccent"
-        android:textSize="@dimen/_30ssp"
+        android:textSize="@dimen/_23ssp"
+        android:gravity="center"
+
         android:transitionName="logo_txt"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

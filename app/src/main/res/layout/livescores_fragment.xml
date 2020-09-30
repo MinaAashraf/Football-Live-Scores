@@ -77,7 +77,7 @@
             android:layout_marginRight="@dimen/_10sdp"
             android:fontFamily="@font/gudea"
             android:gravity="center"
-            android:text="There are no teams or leagues to follow!"
+            android:text="There are no teams or leagues to follow, add to your favaourite now !"
             android:textColor="#595959"
             android:textSize="@dimen/_15ssp"
             android:textStyle="bold"

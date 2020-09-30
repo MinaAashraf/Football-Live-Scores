@@ -14,5 +14,5 @@
         android:maxLines="1"
         android:text="Live Score"
         android:textColor="#000"
-        android:textSize="@dimen/_15ssp" />
+        android:textSize="@dimen/_13ssp" />
 </RelativeLayout>

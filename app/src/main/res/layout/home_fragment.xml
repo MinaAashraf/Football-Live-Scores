@@ -38,12 +38,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginTop="@dimen/_3sdp"
                     android:layout_marginStart="@dimen/_5sdp"
                     android:fontFamily="@font/alfa_slab_one"
                     android:text="@string/app_name"
                     android:textColor="@color/colorAccent"
-                    android:textSize="@dimen/_15ssp"
+                    android:textSize="@dimen/_14ssp"
                     />
             </LinearLayout>
 

@@ -25,6 +25,7 @@ import com.football.matches.livescores.pojo.LeagueResponceObject;
 import com.football.matches.livescores.pojo.Team;
 import com.football.matches.livescores.ui.ChooseTeam;
 import com.football.matches.livescores.ui.SharedPreferenceFactory;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -52,7 +53,7 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.MyViewHo
         this.activity = activity;
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         this.type = type;
-        SharedPreferences sharedPreferences = context.getSharedPreferences("liveScores",Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = context.getSharedPreferences("liveScores", Context.MODE_PRIVATE);
         if (type.equals("local")) {
             set = sharedPreferences.getStringSet(context.getResources().getString(R.string.followingTeamsObjs), new HashSet<String>());
             if (!set.isEmpty()) {
@@ -61,6 +62,8 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.MyViewHo
                 next_btn.setTextColor(Color.WHITE);
             }
         }
+        if (!sharedPreferences.getBoolean("dontStartAgain", false))
+            observepremiereLeague();
     }
 
     @NonNull
@@ -153,7 +156,9 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.MyViewHo
             }
         });
     }
-    List <League> leagues = new ArrayList<>();
+
+
+    List<League> leagues = new ArrayList<>();
 
     private void observeLeagues(String countryName) {
         leagues.clear();
@@ -162,6 +167,29 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.MyViewHo
             public void onChanged(List<LeagueResponceObject> leagueResponceObjects) {
                 progressBar.setVisibility(View.GONE);
                 leagueAdapter.setData(leagueResponceObjects);
+            }
+        });
+    }
+
+    private void observepremiereLeague() {
+        ChooseTeam.myViewModel.getCountryLeagues("England").observe((LifecycleOwner) context, new Observer<List<LeagueResponceObject>>() {
+            @Override
+            public void onChanged(List<LeagueResponceObject> leagueResponceObjects) {
+                for (LeagueResponceObject leagueResponceObject : leagueResponceObjects) {
+                    if (leagueResponceObject.getLeague().getName().equals("Premier League")) {
+                        String json = new Gson().toJson(leagueResponceObject);
+                        SharedPreferences sharedPreferences = context.getSharedPreferences("liveScores", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        Set<String> leagueSet = sharedPreferences.getStringSet(context.getResources().getString(R.string.followingLeagueObjs), new HashSet<String>());
+                        Set<String> newSet = new HashSet<String>();
+                        if (leagueSet.size() != 0) {
+                            for (String json1 : leagueSet)
+                                newSet.add(json1);
+                        }
+                        newSet.add(json);
+                        editor.putStringSet(context.getResources().getString(R.string.followingLeagueObjs), newSet).apply();
+                    }
+                }
             }
         });
     }

@@ -66,7 +66,7 @@ public class MyViewModel extends AndroidViewModel {
     private MutableLiveData<List<EventResponceObj>> scorersEvents;
     private MutableLiveData<List<EventResponceObj>> events;
     private MutableLiveData<List<LineupResponseObj>> lineUps;
-    private MutableLiveData<List<FixtureResposeObj>> leagueFixtures;
+    private MutableLiveData<List<List<FixtureResposeObj>>> leagueFixtures;
     private MutableLiveData<List<List<FixtureResposeObj>>> generalFixtures;
     private MutableLiveData<List<PlayerStatisticsObj>> topScorerStatistics;
     private MutableLiveData<List<List<TransferResponceObj>>> tranfers;
@@ -87,6 +87,7 @@ public class MyViewModel extends AndroidViewModel {
         this.articlesByTitleList = new MutableLiveData<>();
         this.teamImageFromAnotherApi = new MutableLiveData<>();
         tranfers = new MutableLiveData<>();
+        leagueFixtures = new MutableLiveData<>();
     }
 
     public MutableLiveData<List<Country>> getCountries() {
@@ -234,9 +235,8 @@ public class MyViewModel extends AndroidViewModel {
 
     int legId = -1;
 
-    public MutableLiveData<List<FixtureResposeObj>> getLeagueFixtures(int leagueId) {
-        if (leagueFixtures == null || this.legId != leagueId) {
-            leagueFixtures = new MutableLiveData<>();
+    public MutableLiveData<List<List<FixtureResposeObj>>> getLeagueFixtures(int leagueId) {
+        if (this.legId != leagueId) {
             this.legId = leagueId;
             loadLeagueFixtures();
         }
@@ -388,7 +388,11 @@ public class MyViewModel extends AndroidViewModel {
                         Toast.makeText(application, "Sorry ,the functionality is not working due to API limitations", Toast.LENGTH_LONG).show();
                     return;
                 }
-                leagueFixtures.setValue(response.body().getResponse());
+                List<List<FixtureResposeObj>> totalList = new ArrayList<>();
+                if (leagueFixtures.getValue() != null && !leagueFixtures.getValue().isEmpty())
+                    totalList.addAll(leagueFixtures.getValue());
+                totalList.add(response.body().getResponse());
+                leagueFixtures.setValue(totalList);
             }
 
             @Override

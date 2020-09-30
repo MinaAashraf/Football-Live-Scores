@@ -155,8 +155,25 @@ public class HomeNewsFragment extends Fragment {
         myViewModel.getArticlesByTitle(searchTitles, 10).observe(getActivity(), new Observer<List<List<Article>>>() {
             @Override
             public void onChanged(List<List<Article>> lists) {
-               if (lists.size() == folowingteamsList.size() + folowingcompList.size() + folowingPlayersList.size()) {
-                    for (AdapterWithSearchedTitle adapterWithSearchedTitle : adaptersWithSearchedTiltes) {
+                for (List<Article> list : lists){
+                    for (AdapterWithSearchedTitle adapterWithSearchedTitle : adaptersWithSearchedTiltes)
+                    {
+                        String title = adapterWithSearchedTitle.getTitle().toLowerCase();
+                        boolean titleMatching = true;
+                        for (Article article : list) {
+                            if (!article.getTitle().toLowerCase().contains(title)) {
+                                titleMatching = false;
+                                break;
+                            }
+                        }
+                        if (titleMatching) {
+                            adapterWithSearchedTitle.getAdapter().setData(list);
+                            adaptersWithSearchedTiltes.remove(adapterWithSearchedTitle);
+                            break;
+                        }
+                    }
+                }
+                   /* for (AdapterWithSearchedTitle adapterWithSearchedTitle : adaptersWithSearchedTiltes) {
                         String title = adapterWithSearchedTitle.getTitle().toLowerCase();
                         for (List<Article> list : lists) {
                             boolean titleMatching = true;
@@ -168,11 +185,12 @@ public class HomeNewsFragment extends Fragment {
                             }
                             if (titleMatching) {
                                 adapterWithSearchedTitle.getAdapter().setData(list);
+                                adaptersWithSearchedTiltes.remove(adapterWithSearchedTitle);
                                 break;
                             }
                         }
-                    }
-                }
+                    }*/
+
             }
         });
     }

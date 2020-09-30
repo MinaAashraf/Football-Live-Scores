@@ -94,8 +94,8 @@ public class ApiClient {
     }
 
     public Call<FixturesJsonResult> getGeneralFixtures(Map<String, String> map) {
-        map.put("season", String.valueOf(SEASON));
-        map.put("timezone", TIMEZONE);
+        map.put("season", "2020");
+        map.put("timezone", "Africa/Cairo");
         return apiInterface.getGeneralFixtures(map);
     }
 
