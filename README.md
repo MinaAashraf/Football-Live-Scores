@@ -6,6 +6,7 @@
 ***
 
 ## Technologies Used
+    * Android/ Java
     * Retrofit
     * MVVM Pattern
 ***
